@@ -6,6 +6,14 @@ let tarefa;
 
 console.log("OLÁ BEM VINDO À SUA LISTA DE TAREFAS");
 
+function exibicao (){
+    console.log("=== Lista de Tarefas ===\n")
+        for(let i = 0;i < listadeTarefas.length;i++){
+                console.log(i + "." + listadeTarefas[i])
+                    
+            }
+}
+
 function MENU() {
     console.log("\n<=== MENU ===>\n")
     console.log("1 - Adicionar Tarefa");
@@ -24,11 +32,7 @@ function adicionarTarefa() {
      tarefa = promptsync("Adicionar tarefa:")
         console.log("")
         listadeTarefas.push(tarefa)
-        console.log("=== Lista de Tarefas ===\n")
-        for(let i = 0;i < listadeTarefas.length;i++){
-                console.log(i + "." + listadeTarefas[i])
-                    
-            }
+        exibicao()     
 }
 
 function removerTarefa() {
@@ -39,11 +43,7 @@ function removerTarefa() {
         if (indice !== -1) {
           listadeTarefas.splice(indice, 1);
         }
-            console.log("=== Lista de Tarefas ===\n")
-            for(let i = 0 ;i < listadeTarefas.length;i++){
-                console.log(i + "." + listadeTarefas[i])                       
-
-           }
+            exibicao()
 }
      function concluirTarefa() {
          tarefa = promptsync("Concluir tarefa:")       
@@ -55,11 +55,7 @@ function removerTarefa() {
         tarefasConcluidas.push(listadeTarefas[indice]);
         listadeTarefas.splice(indice, 1);
     }
-
-    console.log("=== Lista de Tarefas ===\n");
-    for (let i = 0; i < listadeTarefas.length; i++) {
-        console.log(i + ". " + listadeTarefas[i]);
-    }
+   exibicao()
 }
 
 
@@ -75,10 +71,7 @@ function listaConcluidas() {
 
 function tarefasPendentes() {
     console.log("=== Lista de Tarefas Pendentes ===\n")
-        for(let i = 0 ;i < listadeTarefas.length;i++){
-                console.log(i + "." + listadeTarefas[i])
-                        
-            }
+        exibicao()
         console.log("")
         console.log("//Fim//")
 }
