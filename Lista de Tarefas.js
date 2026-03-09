@@ -1,4 +1,5 @@
-const promptsync = require ("prompt-sync")();
+const promptsync = require("prompt-sync")();
+
 let listadeTarefas = []
 let tarefasConcluidas = []
 let opcao;
@@ -6,12 +7,11 @@ let tarefa;
 
 console.log("OLÁ BEM VINDO À SUA LISTA DE TAREFAS");
 
-function exibicao (){
+function exibicao() {
     console.log("=== Lista de Tarefas ===\n")
-        for(let i = 0;i < listadeTarefas.length;i++){
-                console.log(i + "." + listadeTarefas[i])
-                    
-            }
+    for (let i = 0; i < listadeTarefas.length; i++) {
+        console.log(i + "." + listadeTarefas[i])
+    }
 }
 
 function MENU() {
@@ -21,6 +21,7 @@ function MENU() {
     console.log("3 - Concluir tarefa");
     console.log("4 - Mostrar Lista de Tarefas Concluidas")
     console.log("5 - Mostrar Lista de Tarefas Pendentes")
+    console.log("6 - Editar tarefa")
     console.log("0 - Sair\n");
 }
 
@@ -29,24 +30,26 @@ function sair() {
 }
 
 function adicionarTarefa() {
-     tarefa = promptsync("Adicionar tarefa:")
-        console.log("")
-        listadeTarefas.push(tarefa)
-        exibicao()     
+    tarefa = promptsync("Adicionar tarefa:")
+    console.log("")
+    listadeTarefas.push(tarefa)
+    exibicao()
 }
 
 function removerTarefa() {
     tarefa = promptsync("Remover tarefa:")
 
-        let indice = listadeTarefas.indexOf(tarefa);
+    let indice = listadeTarefas.indexOf(tarefa);
 
-        if (indice !== -1) {
-          listadeTarefas.splice(indice, 1);
-        }
-            exibicao()
+    if (indice !== -1) {
+        listadeTarefas.splice(indice, 1);
+    }
+
+    exibicao()
 }
-     function concluirTarefa() {
-         tarefa = promptsync("Concluir tarefa:")       
+
+function concluirTarefa() {
+    tarefa = promptsync("Concluir tarefa:")
 
     let indice = listadeTarefas.indexOf(tarefa);
 
@@ -55,65 +58,99 @@ function removerTarefa() {
         tarefasConcluidas.push(listadeTarefas[indice]);
         listadeTarefas.splice(indice, 1);
     }
-   exibicao()
+
+    exibicao()
 }
 
+function editarTarefa() {
+
+    tarefa = promptsync("Qual tarefa deseja editar: ")
+
+    let indice = listadeTarefas.indexOf(tarefa)
+
+    if (indice !== -1) {
+
+        let novaTarefa = promptsync("Digite a nova tarefa: ")
+
+        listadeTarefas[indice] = novaTarefa
+
+        console.log("\nTarefa editada com sucesso!\n")
+
+    } else {
+
+        console.log("Tarefa não encontrada.")
+
+    }
+
+    exibicao()
+
+}
 
 function listaConcluidas() {
     console.log("=== Lista de Tarefas Concluidas ===\n")
-        for(let i = 0 ;i < tarefasConcluidas.length;i++){
-                console.log(i + "." + tarefasConcluidas[i])
-                        
-            }
-        console.log("")
-        console.log("//Fim//")
+    for (let i = 0; i < tarefasConcluidas.length; i++) {
+        console.log(i + "." + tarefasConcluidas[i])
+    }
+
+    console.log("")
+    console.log("//Fim//")
 }
 
 function tarefasPendentes() {
     console.log("=== Lista de Tarefas Pendentes ===\n")
-        exibicao()
-        console.log("")
-        console.log("//Fim//")
+    exibicao()
+    console.log("")
+    console.log("//Fim//")
 }
 
-while(opcao !== "0"){
+while (opcao !== "0") {
+
     console.log("")
     MENU()
     console.log("")
+
     opcao = promptsync("Opção do Menu:")
-        if(opcao === ""){
-            opcao = "0"
-        }
+
+    if (opcao === "") {
+        opcao = "0"
+    }
+
     console.log("")
-    
-switch (opcao) {
-    case "1":
-       adicionarTarefa();
-        break;
 
-    case "0":
-        sair();
-        break;
-    
-    case "2":
-        removerTarefa();
-        break;
-    
-    case "3":
-      concluirTarefa();
-        break;
+    switch (opcao) {
 
-    case "4":
-        listaConcluidas();
-        break;
+        case "1":
+            adicionarTarefa();
+            break;
 
-    case "5":
-        tarefasPendentes();
-        break;
+        case "2":
+            removerTarefa();
+            break;
 
-    default:
-        console.log("Comando Inválido/Inexistente.")
-        break;
+        case "3":
+            concluirTarefa();
+            break;
 
-}
+        case "4":
+            listaConcluidas();
+            break;
+
+        case "5":
+            tarefasPendentes();
+            break;
+
+        case "6":
+            editarTarefa();
+            break;
+
+        case "0":
+            sair();
+            break;
+
+        default:
+            console.log("Comando Inválido/Inexistente.")
+            break;
+
+    }
+
 }
